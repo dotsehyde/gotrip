@@ -12,6 +12,8 @@ class _TripHistoryPageState extends ConsumerState<TripHistoryPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      child: Text("Trip History"),
+    );
   }
 }

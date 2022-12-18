@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gotrip/core/constants.dart';
 import 'package:gotrip/core/go_trip_icons_icons.dart';
+import 'package:gotrip/pages/add_trip.dart';
 import 'package:gotrip/pages/home.dart';
+import 'package:gotrip/pages/profile.dart';
+import 'package:gotrip/pages/scan_page.dart';
 import 'package:gotrip/pages/trip_history.dart';
 
 class BottomNav extends StatefulWidget {
@@ -13,7 +16,13 @@ class BottomNav extends StatefulWidget {
 
 class _BottomNavState extends State<BottomNav> {
   int _index = 0;
- final List<Widget> _pages = [HomePage(), TripHistoryPage(), HomePage()];
+  final List<Widget> _pages = [
+    const HomePage(),
+    const ScanPage(),
+    const AddTripPage(),
+    const TripHistoryPage(),
+    const ProfilePage(),
+  ];
   final List<IconData> _items = [
     GoTripIcons.home,
     Icons.qr_code_scanner_rounded,
@@ -43,7 +52,7 @@ class _BottomNavState extends State<BottomNav> {
                         });
                       },
                       child: Container(
-                        padding: EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           color: _items.indexOf(e) == _index
                               ? primaryColor
@@ -54,7 +63,7 @@ class _BottomNavState extends State<BottomNav> {
                           e,
                           color: _items.indexOf(e) == _index
                               ? Colors.white
-                              : Color(0xFF6D6D6D),
+                              : const Color(0xFF6D6D6D),
                         ),
                       ),
                     ))

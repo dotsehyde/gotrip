@@ -1,1 +1,1 @@
-List<String> types = ["Car", "Bus"];
+List<String> types = ["Bus", "Taxi"];
