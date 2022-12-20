@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:gotrip/core/app_data.dart';
 import 'package:gotrip/core/constants.dart';
 import 'package:gotrip/core/go_trip_icons_icons.dart';
+import 'package:gotrip/widgets/app_bar.dart';
+import 'package:gotrip/widgets/trip_tile.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -15,21 +16,11 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final data = List.generate(20, (index) => "Name $index");
-  String _selType = "Car";
+  String _selType = "Bus";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        centerTitle: true,
-        title: Text("GoTrip",
-            style: Theme.of(context)
-                .textTheme
-                .headline6!
-                .copyWith(color: primaryColor, fontSize: 22.sp)),
-        backgroundColor: Colors.transparent,
-        automaticallyImplyLeading: false,
-      ),
+      appBar: customAppBar(context),
       body: SafeArea(
         child: SizedBox(
           child: Scrollbar(
@@ -139,7 +130,7 @@ class _HomePageState extends State<HomePage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        ...types.map((e) => GestureDetector(
+                        ...carTypes.map((e) => GestureDetector(
                               onTap: () => setState(() {
                                 _selType = e;
                               }),
@@ -191,80 +182,20 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
-              SliverList(
+              SliverGrid(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 1,
+                  mainAxisSpacing: 3.w,
+                ),
                 delegate: SliverChildBuilderDelegate((context, index) {
-                  return Container(
-                    margin: EdgeInsets.symmetric(horizontal: 3.w),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.2),
-                          spreadRadius: 1,
-                          blurRadius: 1,
-                          offset: Offset(0, 1), // changes position of shadow
-                        ),
-                      ],
-                    ),
-                    child: Row(
-                      children: [
-                        Container(
-                          width: 20.w,
-                          height: 20.w,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(10),
-                              bottomLeft: Radius.circular(10),
-                            ),
-                            image: DecorationImage(
-                              image: AssetImage("img/pp.png"),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "New York $index",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyText1!
-                                  .copyWith(
-                                    fontSize: 17.sp,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                            ),
-                            Text(
-                              "USA",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyText1!
-                                  .copyWith(
-                                    fontSize: 17.sp,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                            ),
-                            Text(
-                              "From \$ 100",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyText1!
-                                  .copyWith(
-                                    fontSize: 17.sp,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ).paddingBottom(1.5.h);
+                  return TripTile(tripData);
                 }, childCount: 20),
+              ),
+              SliverToBoxAdapter(
+                child: SizedBox(
+                  height: 1.5.h,
+                ),
               )
             ]),
           ),
