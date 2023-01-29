@@ -13,7 +13,8 @@ Color primaryColor = const Color(0xFF674DEE);
 Color secondaryColor = const Color(0xFF6C19D8);
 Color xGrey = const Color(0xFF848484);
 
-ThemeData lightTheme = ThemeData.light().copyWith(
+ThemeData lightTheme = ThemeData.light(
+).copyWith(
   primaryColor: primaryColor,
   backgroundColor: Colors.white,
   textTheme: TextTheme(
@@ -29,7 +30,8 @@ ThemeData lightTheme = ThemeData.light().copyWith(
   ),
 );
 
-ThemeData darkTheme = ThemeData.dark().copyWith(
+ThemeData darkTheme = ThemeData.dark(
+).copyWith(
   primaryColor: primaryColor,
   backgroundColor: Colors.black,
   textTheme: TextTheme(

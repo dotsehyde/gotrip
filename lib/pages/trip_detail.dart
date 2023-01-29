@@ -171,6 +171,7 @@ class _TripDetailPageState extends ConsumerState<TripDetailPage> {
             //Trip Info
             Container(
               width: double.infinity,
+              padding: EdgeInsets.symmetric(vertical: 1.h,horizontal: 2.w),
               margin: EdgeInsets.symmetric(horizontal: 3.w, vertical: 2.h),
               decoration: BoxDecoration(
                   border: Border.all(color: xGrey),
@@ -209,19 +210,22 @@ class _TripDetailPageState extends ConsumerState<TripDetailPage> {
                             .copyWith(fontSize: 16.sp)),
                   ],
                 ).paddingSymmetric(vertical: 1.5.h),
-                Row(
-                  children: [
-                    Icon(Icons.person, color: primaryColor).paddingRight(2.w),
-                    Text(
-                        widget.trip.driver.firstName +
-                            " " +
-                            widget.trip.driver.lastName,
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline6!
-                            .copyWith(fontSize: 16.sp)),
-                  ],
-                ),
+               TextButton.icon(
+              onPressed: () {},
+              icon: Icon(Icons.phone,color: Colors.white,),
+              label: Text(
+                "Call Driver",
+                style: Theme.of(context).textTheme.headline6!.copyWith(
+                    fontSize: 18.sp,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w800),
+              ),
+              style: TextButton.styleFrom(
+                  backgroundColor: primaryColor,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  minimumSize: Size(double.infinity, 6.h)),
+            ),
               ]),
             ),
             Spacer(),
